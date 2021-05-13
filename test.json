@@ -17,5 +17,5 @@ export default {
       "text": "Revive"
     }
   },
-  "eta": "({{delay}}min delay)",
+  "eta": "({{delay}}min delay)"
 }
