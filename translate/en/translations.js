@@ -1,4 +1,5 @@
 export default {
+  "clearDate": "Clear date",
   "actions": {
     "goToRow": "Go to row ID",
     "refresh": {
@@ -96,7 +97,6 @@ export default {
     "ok": "OK",
     "openLatest": "Open latest",
     "refresh": "Refresh",
-    "remove": "Remove",
     "replace": "Replace",
     "reset": "Reset",
     "restore": "Restore",
@@ -118,9 +118,9 @@ export default {
     "yes": "Yes",
     "yesAddStop": "Yes, add stop",
     "yesImport": "Yes, import file",
-    "yesReset": "Yes, reset anyway"
+    "yesReset": "Yes, reset anyway",
+    "remove": "Remove"
   },
-  "clearDate": "Clear date",
   "collapsable": {
     "close": "Close",
     "more": "More..."
@@ -581,7 +581,6 @@ export default {
       },
       "validations": {
         "columnNames": {
-          "alignment": "Alignment",
           "days_of_week": "Days Of Week",
           "destination_stop_id": "Destination Stop Id",
           "direction": "Direction",
@@ -589,18 +588,16 @@ export default {
           "end_time_range": "End Time Range",
           "origin_stop_id": "Origin Stop Id",
           "purpose": "Purpose",
-          "purpose_and_direction": "Purpose, Direction",
           "speed": "Distance, Travel Time",
           "start_time_range": "Start Time Range",
           "travel_time": "Travel Time",
-          "travel_time_and_distance": "Travel Time/Distance"
+          "travel_time_and_distance": "Travel Time/Distance",
+          "alignment": "Alignment",
+          "purpose_and_direction": "Purpose, Direction"
         },
         "dialogMsg": "Catalog \"{{catalogName}}\" could not be imported because {{errorCount}} issues were found with the file. Edit the catalog to fix the issues. Then import it again.",
         "types": {
-          "combination_purpose_with_invalid_direction": "The direction must be left blank when the purpose is set to \"combination\"",
           "duplicated_trips": "This trip is also listed in row(s): {{rowIds}}",
-          "inconsistent_alignment": "This trip is also listed in the following row(s) with varying values for alignment: {{rowIds}}",
-          "invalid_alignment_value": "The alignment must be defined as either “Earliest”, “Latest”, or left blank if any alignment is acceptable",
           "invalid_days_of_week": "The Days of Week column must be defined as a numerical sequence (such as 2345) indicating which days each trip can take place (“1” for Sunday, “2” for Monday, etc.)",
           "invalid_direction": "The direction must be defined as \"from\" or \"to\" or left blank if any direction is acceptable",
           "invalid_time_range_format": "Time range must be written in HH:MM format",
@@ -609,7 +606,11 @@ export default {
           "speed_above_max": "Speed (distance divided by travel time) must be {{maxValue}}{{unit}} or less",
           "travel_time_above_max": "Travel time must be {{maxValue}} minutes or less",
           "travel_time_not_in_minutes": "Travel time must be a whole number, in minutes (e.g. no decimals)",
-          "trips_overlap": "This trip is also listed in the following row(s) but the travel time and/or distance is different: {{rowIds}}"
+          "trips_overlap": "This trip is also listed in the following row(s) but the travel time and/or distance is different: {{rowIds}}",
+          "invalid_alignment_value": "The alignment must be defined as either “Earliest”, “Latest”, or left blank if any alignment is acceptable",
+          "inconsistent_alignment": "This trip is also listed in the following row(s) with varying values for alignment: {{rowIds}}",
+          "combination_purpose_with_invalid_direction": "The direction must be left blank when the purpose is set to \"combination\""
+
         }
       }
     },
@@ -659,10 +660,6 @@ export default {
         "error": "Pre-trip could not be added",
         "message": "We weren't able to add a pre-trip. If you try again and still need help, contact support@optibus.com."
       },
-      "addPublicTransportTrip": {
-        "error": "Public transportation trip could not be added",
-        "message": "We weren't able to add a public transportation trip. If you try again and still need help, contact support@optibus.com."
-      },
       "addRechargeTrip": {
         "error": "Recharge event could not be added",
         "message": "We weren't able to add a recharge event. If you try again and still need help, contact support@optibus.com."
@@ -686,6 +683,10 @@ export default {
       "addTravelTrip": {
         "error": "Travel trip could not be added",
         "message": "We weren't able to add a travel trip. If you try again and still need help, contact support@optibus.com."
+      },
+      "addPublicTransportTrip": {
+        "error": "Public transportation trip could not be added",
+        "message": "We weren't able to add a public transportation trip. If you try again and still need help, contact support@optibus.com."
       },
       "cantMoveMultiSelect": {
         "changeover": "Trips can't be reassigned because there is a changeover in the selection",
@@ -1210,6 +1211,9 @@ export default {
       "short_description": "An error occurred in the custom execution of {{preference}}"
     },
     "data_error": {
+      "missing_vehicle_type": {
+        "short_description": "This action could not be completed because there are costs per vehicle type in the Costs preference with no selected vehicle type. To continue, select a vehicle type."
+      },
       "cannot_convert_service_to_days": {
         "short_description": "Service ID {{service_id}} can't be converted to days"
       },
@@ -1445,9 +1449,6 @@ export default {
       "missing_timeplan_services_error": {
         "detailed_description": "None of the filtered services or service groups were found in the timeplan.\nPlease check the value selected for filtering.",
         "short_description": "Failed to create a timeplan."
-      },
-      "missing_vehicle_type": {
-        "short_description": "This action could not be completed because there are costs per vehicle type in the Costs preference with no selected vehicle type. To continue, select a vehicle type."
       },
       "multiple_algo_params_as_custom_vehicle_preference": {
         "short_description": "The optimization could not be completed because something went wrong with the Custom Vehicle Preference. Contact support@optibus.com for assistance."
@@ -1697,6 +1698,9 @@ export default {
         "explanation": "Vehicle ID {{vehicle_id}} is not an integer value.\nPlease make sure all vehicle IDs are integers",
         "short_description": "Can't export Avail"
       },
+      "invalid_alignment_value": {
+        "short_description": "The alignment at row {{row}} must be defined as either “earliest” or “latest”, or left blank if any alignment is acceptable"
+      },
       "avail_route_missing_integer_id": {
         "explanation": "Route {{route_id}} does not have an integer defined for the route, route code, or Avail_route_number.\nPlease assign an integer to one of these values.",
         "short_description": "Can't export Avail"
@@ -1752,12 +1756,13 @@ export default {
         "detailed_description": "The following breaks are missing from the Duty Breaks preference: {{missing_duty_break_ids}}",
         "short_description": "This action could not be completed because the '{{instance_pref_name}}' preference (in the Driver signing category) references breaks that do not exist in the Duty Breaks preference. Remove these breaks from the '{{instance_pref_name}}' preference. Or add the missing breaks to the Duty Breaks preference."
       },
+      "multiple_travel_instances_of_same_pref_group": {
+        "detailed_description": "The following preference groups have more than one configuration defined: {{pref_group_ids}}",
+        "short_description": "The {{preference_type}} preference has multiple configurations defined for the same preference group, although the maximum configuration is one per group. To continue, please remove the additional configurations."
+      },
       "duplicated_time_definition": {
         "detailed_description": "This action could not be completed because there are duplicate time definition IDs in your preference settings. To continue, delete the time definition ID '{{time_definition}}' in the Time Definitions preference. (Alternatively, if you have multiple preference groups, you may associate the ID with a different preference group.)",
         "short_description": "Action could not be completed"
-      },
-      "duplicate_registration_name": {
-        "short_description": "The protocol could not be exported because it contains duplicate registration names. To continue, go to the registration configuration and make sure that all registrations have unique names."
       },
       "duplicate_service_id_defined": {
         "short_description": "Service ID {{service_id}} was defined more than once"
@@ -1796,9 +1801,6 @@ export default {
         "detailed_description": "The operation type: {{op_type}} was assigned to service group: {{service_group}}\nwhile legal operation types are {{legal}}",
         "short_description": "Illegal operation type was assigned to service group"
       },
-      "illegal_registration_name": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain a valid registration name. To continue, go to the registration configuration and make sure that all registrations have a name composed of up to 4 digits."
-      },
       "illegal_service_id_config_for_trip": {
         "short_description": "Trip ID {{trip_id}} has service ID configuration that is not allowed"
       },
@@ -1816,18 +1818,11 @@ export default {
         "detailed_description": "The following trip IDs have stop arrival times that are not compatible with the stop sequence: {{trip_ids}}",
         "short_description": "The GTFS file couldn't be imported because one or more trip IDs have stop arrival times that are not compatible with the stop sequence. Go to the file and edit the stop arrival times. Then import the file again."
       },
-      "invalid_alignment_value": {
-        "short_description": "The alignment at row {{row}} must be defined as either “earliest” or “latest”, or left blank if any alignment is acceptable"
-      },
       "invalid_break_rule_definition": {
         "short_description": "'{{break_rule_id}}' wasn't defined correctly in the breaks preference. To get going again, please contact support"
       },
       "invalid_catalog": {
         "short_description": "This action could not be completed because the {{catalog_type}} preference contains an invalid catalog. To continue, go to the preference and assign a valid catalog."
-      },
-      "invalid_stop_id": {
-        "detailed_description": "The following midpoint stop IDs are either invalid or not midpoints: {{stop_ids}}",
-        "short_description": "The export could not be completed because one or more midpoint stop IDs are either invalid or not midpoints. Go to configurations and make sure that all midpoint stop IDs are both valid, midpoints and separated by a comma. Then export again."
       },
       "invalid_stop_sequence": {
         "detailed_description": "The trip ID {{trip_id}} could not be imported import due to invalid stop sequence value. Stop sequence values are {{stop_sequences}}",
@@ -1847,9 +1842,6 @@ export default {
       },
       "mandatory_ev_preference_missing": {
         "short_description": "This action could not be completed because {{preference_type}} preference has not been defined. Make sure all the preferences in the Electric Vehicles category (Batteries, Chargers, Charging Profiles, Charging Stations) are defined."
-      },
-      "mismatch_registration_short_notice_service_code": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice justification service reference {{service_ref}} that does not match any service reference. To continue, go to the registration configuration and make sure that all the short notice justification service references have a matching service reference."
       },
       "missing_agency_name": {
         "short_description": "An agency is missing an agency ID and name, which are required"
@@ -1877,6 +1869,12 @@ export default {
         "detailed_description": "The operation failed since a preference called {{pref_name}} referenced {{missing_duty_break_ids}} which not defined in the Duty Breaks preference.\nPlease add definitions for them in the Duty Breaks preference and retry",
         "short_description": "Duty breaks: {{missing_duty_break_ids}} are not defined in the Duty Breaks preference"
       },
+      "travel_purpose_enabled_without_taxi_to_preference": {
+        "short_description": "The operation could not be completed because the {{taxi_to_preference}} preference is not defined, although there is a Duty Travel preference defined for that purpose. To continue, either add the {{taxi_to_preference}} preference or delete the Duty Travel preference."
+      },
+      "taxi_to_preference_defined_with_travel_and_no_purpose": {
+        "short_description": "The operation could not be completed because the {{taxi_to_preference}} preference is defined but there is no Duty Travel preference defined for that purpose. To continue, either delete the {{taxi_to_preference}} preference or add {{travel_purpose}} to Purpose in the Duty Travel preferences."
+      },
       "missing_duty_types_definition": {
         "short_description": "This action could not be completed because the following preference groups do not have duty types defined: {{groups}}. To proceed, either define duty types for these preference groups or go to each preference group in your preferences and select \"Exclude from optimization\"."
       },
@@ -1890,44 +1888,50 @@ export default {
       "missing_operator_data": {
         "short_description": "The export could not be completed because the Operator configuration does not contain any data. Go to the Operator configuration and add data. Then export again."
       },
-      "missing_operator_id": {
-        "short_description": "The export could not be completed because Operator configuration does not contain an ID. Go to the Operator configuration and add the missing ID. Then export the timeplan again."
-      },
-      "missing_project_naptan_stops": {
-        "short_description": "Stops {{stops_list}} are missing latitude and longitude information. Please add the missing information using the Export and Import stop catalog feature in the project and try again."
-      },
-      "missing_registration_circulated_authorities": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain any circulated authorities. To continue, go to the registration configuration and make sure that all registrations have at least one selected circulated authority."
-      },
-      "missing_registration_discontinued_service_operator": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice type of ReplaceDiscontinuedService, but missing the discontinued service operator. To continue, go to the registration configuration and make sure that all registrations that have short notice type of ReplaceDiscontinuedService have a discontinued service operator."
-      },
-      "missing_registration_licence_number": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain a licence number. To continue, go to the registration configuration and make sure that all registrations have a licence number."
-      },
-      "missing_registration_minor_change_description": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has change impact that does not exceed limit, but has no minor change description. To continue, go to the registration configuration and make sure that all registrations that have change impact that does not exceed limit have also a minor change description."
-      },
-      "missing_registration_non_public_description": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} is set to be not available for public, but has no description. To continue, go to the registration configuration and make sure that all registrations that are not available for public have a description."
-      },
-      "missing_registration_service_code": {
-        "short_description": "The protocol could not be exported because the registration named {{reg_name}} does not contain a service reference. To continue, go to the registration configuration and make sure that all registrations have a service reference."
-      },
-      "missing_registration_short_notice_description": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice type of {{short_notice_justification_type}}, but missing the short notification description for the {{description_tag}} element. To continue, go to the registration configuration and make sure that all registrations that have short notice type of {{short_notice_justification_type}} have a short notice description."
-      },
-      "missing_registration_short_notice_details": {
-        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice type of {{short_notice_type}}, but missing either the relevant service reference or description. To continue, go to the registration configuration and make sure that all registrations that have short notice type of {{short_notice_type}} have both relevant service reference and description"
-      },
       "missing_registration_submission_date": {
         "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain a submission date. To continue, go to the registration configuration and make sure that all registrations have a submission date."
       },
       "missing_registration_traffic_areas": {
         "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain any traffic areas. To continue, go to the registration configuration and make sure that all registrations have at least one selected traffic area."
       },
-      "missing_relief_schedule_configurations": {
-        "short_description": "A relief schedule or schedule with taxi pairing cannot be created without taxi schedule or relief car preferences"
+      "missing_registration_non_public_description": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} is set to be not available for public, but has no description. To continue, go to the registration configuration and make sure that all registrations that are not available for public have a description."
+      },
+      "missing_registration_circulated_authorities": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain any circulated authorities. To continue, go to the registration configuration and make sure that all registrations have at least one selected circulated authority."
+      },
+      "missing_registration_minor_change_description": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has change impact that does not exceed limit, but has no minor change description. To continue, go to the registration configuration and make sure that all registrations that have change impact that does not exceed limit have also a minor change description."
+      },
+      "missing_registration_short_notice_details": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice type of {{short_notice_type}}, but missing either the relevant service reference or description. To continue, go to the registration configuration and make sure that all registrations that have short notice type of {{short_notice_type}} have both relevant service reference and description"
+      },
+      "missing_registration_discontinued_service_operator": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice type of ReplaceDiscontinuedService, but missing the discontinued service operator. To continue, go to the registration configuration and make sure that all registrations that have short notice type of ReplaceDiscontinuedService have a discontinued service operator."
+      },
+      "missing_registration_short_notice_description": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice type of {{short_notice_justification_type}}, but missing the short notification description for the {{description_tag}} element. To continue, go to the registration configuration and make sure that all registrations that have short notice type of {{short_notice_justification_type}} have a short notice description."
+      },
+      "missing_registration_licence_number": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain a licence number. To continue, go to the registration configuration and make sure that all registrations have a licence number."
+      },
+      "missing_registration_service_code": {
+        "short_description": "The protocol could not be exported because the registration named {{reg_name}} does not contain a service reference. To continue, go to the registration configuration and make sure that all registrations have a service reference."
+      },
+      "illegal_registration_name": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} does not contain a valid registration name. To continue, go to the registration configuration and make sure that all registrations have a name composed of up to 4 digits."
+      },
+      "duplicate_registration_name": {
+        "short_description": "The protocol could not be exported because it contains duplicate registration names. To continue, go to the registration configuration and make sure that all registrations have unique names."
+      },
+      "mismatch_registration_short_notice_service_code": {
+        "short_description": "The protocol could not be exported because the registration named {{registration_name}} has short notice justification service reference {{service_ref}} that does not match any service reference. To continue, go to the registration configuration and make sure that all the short notice justification service references have a matching service reference."
+      },
+      "missing_operator_id": {
+        "short_description": "The export could not be completed because Operator configuration does not contain an ID. Go to the Operator configuration and add the missing ID. Then export the timeplan again."
+      },
+      "missing_project_naptan_stops": {
+        "short_description": "Stops {{stops_list}} are missing latitude and longitude information. Please add the missing information using the Export and Import stop catalog feature in the project and try again."
       },
       "missing_required_column_in_file": {
         "detailed_description": "In file {{filename}} the required column {{column}} is missing",
@@ -1956,6 +1960,9 @@ export default {
       },
       "missing_stop_coordinates": {
         "short_description": "Stop {{stop_name}} is missing coordinates"
+      },
+      "missing_relief_schedule_configurations": {
+        "short_description": "A relief schedule or schedule with taxi pairing cannot be created without taxi schedule or relief car preferences"
       },
       "missing_time_definition": {
         "detailed_description": "Time definition '{{time_id}}' was defined but wasn't defined in time definitions preference",
@@ -1994,10 +2001,6 @@ export default {
         "detailed_description": "{{instance_names}} are defined within preference group '{{preference_group}}' but only one definition is allowed",
         "short_description": "Preference type {{preference_type}} has more than one definition for the same preference group"
       },
-      "multiple_travel_instances_of_same_pref_group": {
-        "detailed_description": "The following preference groups have more than one configuration defined: {{pref_group_ids}}",
-        "short_description": "The {{preference_type}} preference has multiple configurations defined for the same preference group, although the maximum configuration is one per group. To continue, please remove the additional configurations."
-      },
       "naptan_stops_api": {
         "short_description": "The stops {{stops_list}} failed to be imported using Naptan API. Please contact support for assistance."
       },
@@ -2020,6 +2023,10 @@ export default {
       },
       "paddles_require_schedule_with_days": {
         "short_description": "The paddles report can't be exported from a schedule without the day of the week"
+      },
+      "invalid_stop_id": {
+        "short_description": "The export could not be completed because one or more midpoint stop IDs are either invalid or not midpoints. Go to configurations and make sure that all midpoint stop IDs are both valid, midpoints and separated by a comma. Then export again.",
+        "detailed_description": "The following midpoint stop IDs are either invalid or not midpoints: {{stop_ids}}"
       },
       "parent_not_found": {
         "short_description": "Stop {{stop_id}} has a parent {{parent_id}} that is not in the stop catalog"
@@ -2061,9 +2068,6 @@ export default {
       "sub_trip_does_not_match_to_sub_route": {
         "short_description": "Number of trace points in sub-trip {{sub_trip}} does not match number of trace points in sub-route {{sub_route}}"
       },
-      "taxi_to_preference_defined_with_travel_and_no_purpose": {
-        "short_description": "The operation could not be completed because the {{taxi_to_preference}} preference is defined but there is no Duty Travel preference defined for that purpose. To continue, either delete the {{taxi_to_preference}} preference or add {{travel_purpose}} to Purpose in the Duty Travel preferences."
-      },
       "timetable_invalid_stop_id": {
         "short_description": "Stop {{stop_id}} has invalid ID"
       },
@@ -2073,9 +2077,6 @@ export default {
       },
       "too_many_duties_caesar_integration": {
         "short_description": "Caesar integration does not support more than {{max_duties}} duties"
-      },
-      "travel_purpose_enabled_without_taxi_to_preference": {
-        "short_description": "The operation could not be completed because the {{taxi_to_preference}} preference is not defined, although there is a Duty Travel preference defined for that purpose. To continue, either add the {{taxi_to_preference}} preference or delete the Duty Travel preference."
       },
       "trip_with_negative_or_zero_travel": {
         "detailed_description": "The start time of trip {{trip_id}} (departure time {{departure_time}} minus boarding time {{boarding_time}}) must be less than the end time (arrival time {{arrival_time}} plus alighting time {{offboarding_time}})",
@@ -2142,13 +2143,13 @@ export default {
       "unsupported_content_type": {
         "short_description": "This action could not take place because the content must be in one of these formats: {{content_required_formats}}.\nThe content is currently in {{current_content_format}} format."
       },
-      "unsupported_file_zip_in_zip": {
-        "short_description": "The {{file_name}} file could not be imported because the ZIP file you are trying to import is contained within another ZIP file, which is unsupported. To continue, remove the ZIP file so that it is no longer within another ZIP file. Then import again."
-      },
       "unsupported_import_file_type_exception": {
         "detailed_description": "The following protocols must include the associated protocol and file types in the file name:\n\n{{formats_data}}",
         "error": "File could not be imported",
         "short_description": "The {{filename}} file could not be imported because the protocol and file type must be specified in the file name. Go to the file name and edit it. Then import the file again."
+      },
+      "unsupported_file_zip_in_zip": {
+        "short_description": "The {{file_name}} file could not be imported because the ZIP file you are trying to import is contained within another ZIP file, which is unsupported. To continue, remove the ZIP file so that it is no longer within another ZIP file. Then import again."
       },
       "vehicle_type_id_not_in_data_set": {
         "short_description": "This action could not be completed because depot {{depot_id}} is associated with a vehicle that's not in the dataset ({{vehicle_type_id}}).\nTo continue, make sure the depot is associated with the correct vehicles and that the necessary vehicles are included in the dataset."
@@ -2239,10 +2240,6 @@ export default {
     "excel_import": {
       "driver_base_illegal_circularity": {
         "short_description": "Error in driver base pattern {{pattern_name}} - Unable to process 3 circularities out of 4."
-      },
-      "duplicate_columns_in_import": {
-        "detailed_description": "The following duplicate columns were found: {{duplicate_header_string}}",
-        "short_description": "The file could not be imported because there are columns with duplicate header names on the {{tab_name}} tab"
       },
       "duplicate_definition": {
         "detailed_description": "The term {{term}} has duplicate definitions: {{duplicates}}",
@@ -2338,6 +2335,10 @@ export default {
       },
       "wrong_column_index_in_import": {
         "short_description": "The file could not be imported because the {{tab_name}} tab has {{expected_column_name}} in column {{actual_column_char}} instead of column {{expected_column_char}}"
+      },
+      "duplicate_columns_in_import": {
+        "short_description": "The file could not be imported because there are columns with duplicate header names on the {{tab_name}} tab",
+        "detailed_description": "The following duplicate columns were found: {{duplicate_header_string}}"
       }
     },
     "exporter_error": {
@@ -2488,6 +2489,9 @@ export default {
       }
     },
     "manual_edit_warning": {
+      "edit_event_causes_illegal_overlap": {
+        "short_description": "This event could not be edited because doing so would create an overlap with {{overlapped_event_type}} starting at {{overlapped_event_time}}. To edit the time for this event, first adjust the time for {{overlapped_event_type}}."
+      },
       "add_additional_recharge_after_pull_in": {
         "short_description": "The recharge event could not be added at {{target_stop_id}}. Either recharge at {{current_stop_id}} or add a recharge event after pull-out."
       },
@@ -2522,9 +2526,6 @@ export default {
       },
       "directly_modifying_locked_container": {
         "short_description": "The action could not be completed because the {{container_type}} is locked. To continue, unlock it first."
-      },
-      "edit_event_causes_illegal_overlap": {
-        "short_description": "This event could not be edited because doing so would create an overlap with {{overlapped_event_type}} starting at {{overlapped_event_time}}. To edit the time for this event, first adjust the time for {{overlapped_event_type}}."
       },
       "edit_is_not_allowed_with_preference_that_may_corrupt_schedule": {
         "short_description": "Manual edit action can't be completed due to custom duty preferences: \n{{preferences_names}} which may break the schedule. \nModify these preferences in order to perform this action successfully."
@@ -3148,10 +3149,6 @@ export default {
       "title": "Auto Schedule"
     },
     "orderTrips": "Order trips",
-    "passengerWasUpdated": {
-      "message": "This event was updated and the associated passenger trip was updated accordingly.",
-      "title": "Event updated successfully"
-    },
     "resetOrder": "Reset order",
     "rowView": {
       "columns": {
@@ -3249,9 +3246,13 @@ export default {
     },
     "swapRowHint": "Swap with this row",
     "timeplanViewLinkDisabledHint": "Trips can only be viewed together in the Timeplan if they are part of the same route or route group",
+    "passengerWasUpdated": {
+      "title": "Event updated successfully",
+      "message": "This event was updated and the associated passenger trip was updated accordingly."
+    },
     "tooltip": {
-      "addBoardingTime": "Add boarding time",
       "alightingTime": "Alighting time",
+      "addBoardingTime": "Add boarding time",
       "boardingTime": "Boarding time",
       "chargeSetupTime": "Setup",
       "costDif": "Cost difference",
@@ -3304,7 +3305,6 @@ export default {
       "from": "From: ",
       "hints": {
         "chargeBelowMin": "State of charge is below the minimum of {{minimum}}% defined in the Batteries preference.",
-        "driverIsPartialTrip": "This event cannot be {{editType}} because it is assigned to a sub-trip.",
         "evPrefMissingBattery": "No matching battery in the preference",
         "evPrefMissingBatteryButton": "This recharge event could not be {{editType}} because the associated charging profile is not compatible with the vehicle’s battery",
         "evPrefMissingButton": "This recharge event could not be {{editType}} because there are no matching charger or charging station in the preference",
@@ -3312,7 +3312,6 @@ export default {
         "evPrefMissingMode": "No matching charger in the preference",
         "evPrefMissingNoAdd": "This recharge event could not be added because there are no matching charger or charging station in the preference",
         "evPrefMissingNoEdit": "This recharge event could not be saved because there are no matching charger or charging station in the preference",
-        "hasPublicTravelPassengers": "This event cannot be {{editType}} because doing so would affect the assigned passengers. To {{editTypeVerb}} this event, first use the passenger list to locate and remove those passenger trips.",
         "helpers": {
           "add": "added",
           "assign": "assigned",
@@ -3324,20 +3323,22 @@ export default {
           "move": "moved",
           "save": "saved"
         },
-        "isPublicTransportFromCatalog": "This event cannot be {{editType}}. You can delete this event and create a new one with modified properties.",
         "isPublicTransportFromSchedule": "This event cannot be {{editType}}. You can {{editTypeVerb}} the associated trip, which will adjust this event accordingly.",
+        "isPublicTransportFromCatalog": "This event cannot be {{editType}}. You can delete this event and create a new one with modified properties.",
         "lockedVord": "This trip cannot be {{editType}} because either its duty or vehicle are locked.",
-        "lockedVordModify": "This {{vordType}} cannot be edited because it is locked.",
-        "partialTrip": "This event cannot be {{editType}} because it is a sub-trip.",
-        "passengerLockedEdit": "The vehicle has {{count}} passengers and therefore cannot be {{editType}}; use the passengers list to remove each passenger by locating the taxi event and deleting it.",
-        "passengerLockedEditOne": "The vehicle has a passenger and therefore cannot be {{editType}}; use the passenger list to remove it by locating the taxi event and deleting it.",
-        "publicTravelLockedByOtherPassengers": "This event cannot be {{editType}}. You can {{editTypeVerb}} the associated trip, which will adjust this event accordingly. To {{editTypeVerb}} the associated trip you must first make sure that it has only one passenger by removing the additional passengers.",
-        "reliefCarLocked": "This event cannot be {{editType}} because multiple passengers are scheduled and would be affected. Remove the passengers from this event, then {{editTypeVerb}} it. Or delete this event and create a new version.",
-        "scheduleSyncLock": "This trip can be changed only in the timeplan.",
-        "taxiCantEditDueToPassengers": "This taxi has more than one passenger and therefore cannot be {{editType}}.",
-        "taxiLockedEdit": "The taxi has passengers and therefore cannot be {{editType}}; you can delete the event and add a new one with modified properties.",
+        "travelVehicleIsLocked": "This event cannot be {{editType}}. You can {{editTypeVerb}} the associated trip, which will adjust this event accordingly. To {{editTypeVerb}} the associated trip you must first unlock its vehicle and/or any duties using that vehicle.",
         "travelDriverIsLocked": "This event cannot be {{editType}}. You can {{editTypeVerb}} the associated trip, which will adjust this event accordingly. To {{editTypeVerb}} the associated trip you must first unlock its duty.",
-        "travelVehicleIsLocked": "This event cannot be {{editType}}. You can {{editTypeVerb}} the associated trip, which will adjust this event accordingly. To {{editTypeVerb}} the associated trip you must first unlock its vehicle and/or any duties using that vehicle."
+        "lockedVordModify": "This {{vordType}} cannot be edited because it is locked.",
+        "passengerLockedEdit": "The vehicle has {{count}} passengers and therefore cannot be {{editType}}; use the passengers list to remove each passenger by locating the taxi event and deleting it.",
+        "taxiCantEditDueToPassengers": "This taxi has more than one passenger and therefore cannot be {{editType}}.",
+        "publicTravelLockedByOtherPassengers": "This event cannot be {{editType}}. You can {{editTypeVerb}} the associated trip, which will adjust this event accordingly. To {{editTypeVerb}} the associated trip you must first make sure that it has only one passenger by removing the additional passengers.",
+        "hasPublicTravelPassengers": "This event cannot be {{editType}} because doing so would affect the assigned passengers. To {{editTypeVerb}} this event, first use the passenger list to locate and remove those passenger trips.",
+        "partialTrip": "This event cannot be {{editType}} because it is a sub-trip.",
+        "driverIsPartialTrip": "This event cannot be {{editType}} because it is assigned to a sub-trip.",
+        "passengerLockedEditOne": "The vehicle has a passenger and therefore cannot be {{editType}}; use the passenger list to remove it by locating the taxi event and deleting it.",
+        "scheduleSyncLock": "This trip can be changed only in the timeplan.",
+        "reliefCarLocked": "This event cannot be {{editType}} because multiple passengers are scheduled and would be affected. Remove the passengers from this event, then {{editTypeVerb}} it. Or delete this event and create a new version.",
+        "taxiLockedEdit": "The taxi has passengers and therefore cannot be {{editType}}; you can delete the event and add a new one with modified properties."
       },
       "hLabel": "h",
       "influenceTrip": "Route {{sign}} at {{time}}",
@@ -3353,7 +3354,6 @@ export default {
       "nextDay": "Next day",
       "noData": "Data does not exist for this trip",
       "noSplits": "No splits",
-      "note": "Note",
       "nothingToReset": "Nothing to reset",
       "orderTripsTitle": "Order the stack by route, direction and start time",
       "pending": "Pending...",
@@ -3368,7 +3368,6 @@ export default {
       "resetToExistingValue": "Reset to calculated value",
       "saveToCatalog": "Save to catalog",
       "searchStops": "Search stops",
-      "selectType": "Select type...",
       "serviceTimePercentile": "Service time percentile",
       "sortBy": {
         "button": "Sort by",
@@ -3399,8 +3398,11 @@ export default {
       "time": "Time",
       "to": "To: ",
       "toAssignAPassenger": "To assign a passenger to a specific trip, right-click the trip and select \"Add passenger\" from the menu",
+      "willCreateNewReliefCar": "Saving the changes will create a new relief car trip and assign this duty as a passenger",
+      "willAdjustAssociatedPassengerTrip": "Editing this event will adjust the associated passenger trip accordingly",
       "unableToViewDuties": "Not supported as some or all of the vehicle's duties are in stack",
       "unableToViewVehicles": "Not supported as some or all of the duty's vehicles are in stack",
+      "note": "Note",
       "value": "Value",
       "values": {
         "alt": "Alt: ",
@@ -3438,8 +3440,7 @@ export default {
       },
       "warning": "Warning",
       "warnings": "Warnings",
-      "willAdjustAssociatedPassengerTrip": "Editing this event will adjust the associated passenger trip accordingly",
-      "willCreateNewReliefCar": "Saving the changes will create a new relief car trip and assign this duty as a passenger"
+      "selectType": "Select type..."
     }
   },
   "ganttController": {
@@ -3990,8 +3991,8 @@ export default {
     "addStopToCatalog": {
       "error": {
         "dot": "ID can't contain periods (.)",
-        "empty": "Enter a stop ID",
         "invalidChars": "ID can't contain special chars",
+        "empty": "Enter a stop ID",
         "uniq": "Stop ID must be unique"
       },
       "warning": "Stop IDs can't be changed once they have been saved.",
@@ -4439,11 +4440,6 @@ export default {
     "moveRow": "Row {{from}} moved to {{to}} in {{type}} Gantt",
     "moveVehicleToStack": "Vehicles {{ids}} moved to stack",
     "optimize": "Optimized",
-    "other_travel": {
-      "add": "Travel was added to {{type}} {{id}}",
-      "edit": "Travel edited in {{type}} {{id}}",
-      "remove": "Travel was deleted from {{type}} {{id}}"
-    },
     "preferences": {
       "main": "Preferences modified",
       "type": {
@@ -4455,6 +4451,21 @@ export default {
       "edit": "Public transportation edited in {{type}} {{id}}",
       "remove": "Public transportation was deleted from {{type}} {{id}}"
     },
+    "relief_car": {
+      "add": "Relief Car was added to {{type}} {{id}}",
+      "edit": "Relief Car edited in {{type}} {{id}}",
+      "remove": "Relief Car was deleted from {{type}} {{id}}"
+    },
+    "walk": {
+      "add": "Walk was added to {{type}} {{id}}",
+      "edit": "Walk edited in {{type}} {{id}}",
+      "remove": "Walk was deleted from {{type}} {{id}}"
+    },
+    "other_travel": {
+      "add": "Travel was added to {{type}} {{id}}",
+      "edit": "Travel edited in {{type}} {{id}}",
+      "remove": "Travel was deleted from {{type}} {{id}}"
+    },
     "recharge": {
       "add": "Recharge was added to {{type}} {{id}}",
       "edit": "Recharge edited in {{type}} {{id}}",
@@ -4465,11 +4476,6 @@ export default {
       "edit": "Refuel edited in {{type}} {{id}}",
       "remove": "Refuel was deleted from {{type}} {{id}}"
     },
-    "relief_car": {
-      "add": "Relief Car was added to {{type}} {{id}}",
-      "edit": "Relief Car edited in {{type}} {{id}}",
-      "remove": "Relief Car was deleted from {{type}} {{id}}"
-    },
     "save": "Schedule saved",
     "selectedOf": "{{checked}} of {{all}}",
     "serviceTrip": {
@@ -4477,8 +4483,7 @@ export default {
       "delete": "Trip {{tripId}} was deleted",
       "editTime": "{{tripId}} was Edited in {{type}} {{id}}",
       "move": {
-        "one": "Trip {{tripId}} moved from {{type}} {{target}} to {{origin}}",
-        "other": "Trip {{tripId}} moved from {{type}} {{target}} to {{origin}}",
+        "single": "Trip {{tripId}} moved from {{type}} {{target}} to {{origin}}",
         "simultaneous": "Trips on {{type}} {{origin}} between trip IDs {{tripId}} moved to {{target}} ([vehicle, duty])",
         "swap": "Swap from {{tripId}} to {{tripId2}} at {{target}} to {{origin}}",
         "swapRight": "Swap right hand from {{tripId}} at {{target}} to {{origin}}",
@@ -4500,12 +4505,7 @@ export default {
     },
     "updateTrips": "Trips Updated",
     "vehiclesAssigned": "Vehicle {{ids}} trips were assigned",
-    "vehiclesUnassigned": "Vehicle {{ids}} trips were unassigned",
-    "walk": {
-      "add": "Walk was added to {{type}} {{id}}",
-      "edit": "Walk edited in {{type}} {{id}}",
-      "remove": "Walk was deleted from {{type}} {{id}}"
-    }
+    "vehiclesUnassigned": "Vehicle {{ids}} trips were unassigned"
   },
   "optibizeCount": {
     "title": "Running Tasks"
@@ -4528,7 +4528,6 @@ export default {
       },
       "errorPastingRouteTitle": "Error pasting route",
       "invalidPattern": "Invalid pattern: there is a pattern with less than two stops",
-      "invalidPatternMatch": "The pasted stops do not match the specified pattern ({{givenPatternName}}).",
       "invalidRowsCount": "The format is {{expected}} rows. You pasted a table with {{num}} rows.",
       "isTimePointWrongFormat": "In the isTimePoint rows, use only 1 for a timepoint or 0 or leave the cell empty empty for a bus stop.",
       "negativeTravelTime": "There is a negative travel time ({{time}} in row: {{row}}, column: {{col}}.)",
@@ -4539,7 +4538,8 @@ export default {
       "timeTravelNotSupported": "A stop shows an earlier time than that of a previous stop at row: {{row}}, column: {{col}} ({{value}})",
       "wrongColStops": "Your table doesn't have enough columns. Use {{stopsCount}} columns, with each column a stop in the main route",
       "wrongFormat": "Wrong format for time bands; use \"07:00-08:59” format.",
-      "wrongTimeFormat": "Wrong time format: \"{{text}}”; use \"07:39\" format (or leave the cell empty)"
+      "wrongTimeFormat": "Wrong time format: \"{{text}}”; use \"07:39\" format (or leave the cell empty)",
+      "invalidPatternMatch": "The pasted stops do not match the specified pattern ({{givenPatternName}})."
     },
     "format": "Format",
     "format2": "Select the type of data you want to paste",
@@ -4549,16 +4549,16 @@ export default {
     "pasteRouteData": "Paste route data",
     "pasteTimeTableData": "Paste timetable data",
     "rowsChooser": {
-      "allStops": "All stops",
       "distance": "Distance",
-      "excludePatternName": "(exclude pattern name)",
       "factor": "Factor",
       "id": "ID",
-      "includePatternName": "(include pattern name)",
-      "isPattern": "All stops",
       "isTimePoint": "Timepoint",
+      "name": "Stop name",
+      "isPattern": "All stops",
       "isTimePoints": "Time points",
-      "name": "Stop name"
+      "allStops": "All stops",
+      "excludePatternName": "(exclude pattern name)",
+      "includePatternName": "(include pattern name)"
     },
     "runningTimesDescr": "Your format: Table, with each row in this format: \"06:00-06:59\", \"25\", \"15\", \"10\", ...",
     "runningTimesSubDescr": "The number of columns should reflect either time points or all stops",
@@ -4568,19 +4568,25 @@ export default {
     "timetableSubDescr": "The number of columns should reflect all stops.",
     "title": "Paste your data from Excel using Ctrl+V",
     "tooltip": {
-      "allStops": "The number of columns and sequence copy/pasted from Excel must match the main pattern. Paste stops in the relevant columns and leave the irrelevant columns empty.",
       "distance": "The distance (in meters) between the previous stop and the current stop",
       "factor": "A factor in meters is used only to auto-generate running times between the previous stop and the current stop. The factor will be taken into account when interpolating the running times between bus stops. For example, use a positive number of meters if the driving speed between the previous stop and the current stop is less than average. Use a negative number of meters if the driving speed between these stops is faster than average.",
       "id": "The stop ID or stop code. This field is mandatory if the 'Stop name' field is unchecked",
-      "isPattern": "The first column is the pattern name. The number of columns and sequence copy/pasted from Excel must match the main pattern. Paste stops in the relevant columns and leave the irrelevant columns empty.",
       "isTimePoint": "Enter '1' for a timepoint while keeping non-timepoints empty",
+      "name": "The name of the stop. This field is mandatory if the 'ID' field is unchecked",
       "isTimePoints": "The first column is the pattern name. The number of columns and sequence copy/pasted from Excel must match the main pattern. Paste time points only in the relevant columns and leave the irrelevant columns empty.",
-      "name": "The name of the stop. This field is mandatory if the 'ID' field is unchecked"
+      "isPattern": "The first column is the pattern name. The number of columns and sequence copy/pasted from Excel must match the main pattern. Paste stops in the relevant columns and leave the irrelevant columns empty.",
+      "allStops": "The number of columns and sequence copy/pasted from Excel must match the main pattern. Paste stops in the relevant columns and leave the irrelevant columns empty."
     },
     "tryAgain": "Try again",
     "yourFormat": "Your format: "
   },
   "preferences": {
+    "misc": {
+      "origin": "Origin",
+      "destination": "Destination",
+      "addStops": "Add stops",
+      "removeField": "Remove field"
+    },
     "adminDescription": "Customize the {{category}} preferences users will see (Recommended View)",
     "adv": {
       "addPref": "Add Preference",
@@ -4794,9 +4800,9 @@ export default {
         "travelType": "Duty Travel",
         "travelTypeOther": "Other",
         "travelTypePublic": "Public Transportation",
-        "travelTypePublicTransport": "Public Transportation",
         "travelTypeReliefCar": "Relief Car",
         "travelTypeWalk": "Walk",
+        "travelTypePublicTransport": "Public Transportation",
         "tripFrequency": "Trip Headway",
         "tripsProfitability": "Trip Profitability",
         "tripStartTime": "Trip Start Time",
@@ -4844,12 +4850,12 @@ export default {
         "midDayPark": "The conditions under which vehicles can park in the middle of the day",
         "prePostTrip": "How much time to allocate for vehicle preparation and inspection before pull-outs or after pull-ins",
         "reliefPointPreference": "The stops where drivers can relieve other drivers. Specify the associated routes, times of day, and whether relief points are allowed mid-route.",
-        "travelType": "The different travel types drivers can use for different purposes (driver base, changeover, break). The travel types include Walk, Relief Car, and Other (ride-hailing and high-frequency public transportation).",
+        "vehicleIdGenerator": "The logic that determines how vehicle IDs will be generated",
+        "widespread": "How many minutes there should be between trips. Define layovers based on time of day, vehicle type, and attributes like routes and stops",
         "travelTypeOther": "Driver travels between relief and duty points via ride-hailing and high-frequency public transportation.",
         "travelTypeReliefCar": "Driver travels between relief and duty points via designated relief car.",
         "travelTypeWalk": "Driver walks between relief and duty points.",
-        "vehicleIdGenerator": "The logic that determines how vehicle IDs will be generated",
-        "widespread": "How many minutes there should be between trips. Define layovers based on time of day, vehicle type, and attributes like routes and stops"
+        "travelType": "The different travel types drivers can use for different purposes (driver base, changeover, break). The travel types include Walk, Relief Car, and Other (ride-hailing and high-frequency public transportation)."
       },
       "prefGroups": {
         "default": "Default"
@@ -5007,8 +5013,8 @@ export default {
           "info": "This preference is being phased out and has been replaced with \"{{replacingPref}}\". It is no longer supported and may be removed from future versions.",
           "notSupported": "This preference is no longer functional. All information in this preference must be deleted.",
           "notSupportedDeprecated": "This preference has been replaced with \"{{replacingPref}}\" and is no longer usable. Delete this preference and begin using \"{{replacingPref}}\" instead.",
-          "travelWarning": "We have enhanced our duty travel capabilities. As part of this change, this preference is being replaced with {{replacingPref}}. Adjust preferences accordingly or contact support@optibus.com for assistance.",
-          "warning": "This preference is being phased out and has been replaced with \"{{replacingPref}}\". It is no longer supported and may be removed from future versions. Adjust preferences accordingly or contact support."
+          "warning": "This preference is being phased out and has been replaced with \"{{replacingPref}}\". It is no longer supported and may be removed from future versions. Adjust preferences accordingly or contact support.",
+          "travelWarning": "We have enhanced our duty travel capabilities. As part of this change, this preference is being replaced with {{replacingPref}}. Adjust preferences accordingly or contact support@optibus.com for assistance."
         },
         "driverBase": "Define where a driver is allowed start or end a duty",
         "driverBreak": "Define required breaks for drivers at specific times of day",
@@ -5073,10 +5079,10 @@ export default {
         },
         "time_definitions": "Define custom time definitions",
         "time_points_frequencies": "Define required frequencies for timepoints mid-route",
-        "travelType": "The different travel types drivers can use for different purposes (driver base, changeover, break). The travel types include Walk, Relief Car, and Other (ride-hailing and high-frequency public transportation).",
         "travelTypeOther": "Driver travels between relief and duty points via ride-hailing and high-frequency public transportation",
         "travelTypeReliefCar": "Driver travels between relief and duty points via designated relief car",
         "travelTypeWalk": "Driver walks between relief and duty points",
+        "travelType": "The different travel types drivers can use for different purposes (driver base, changeover, break). The travel types include Walk, Relief Car, and Other (ride-hailing and high-frequency public transportation).",
         "tripsProfitability": "Decide whether trips should be operated based on their profitability",
         "trip_departure_frequency": "Define the frequency of trips in different time intervals throughout the day",
         "vehicleDistance": "Limit vehicle blocks distance between returns to a depot for refueling or recharging",
@@ -5126,10 +5132,12 @@ export default {
       "youCanAdd": "Nothing configured yet. You can add a preference below.",
       "youCanAddDynamic": "Nothing configured yet. You can add a {{prefName}} below."
     },
-    "allPurposes": "All purposes",
     "allRoutes": "All routes",
+    "selectRoutes": "Select routes",
+    "allPurposes": "All purposes",
     "allStops": "All stops",
     "clearAll": "Clear errors",
+    "selectCatalog": "Select a catalog",
     "depots": {
       "add": "Add Depot",
       "branch": "Branch ID",
@@ -5151,8 +5159,8 @@ export default {
       "errorWithoutDeprecation": "You are using both {{replacedPref}} and its replacement {{replacingPref}}, which cannot be used simultaneously. Adjust preferences accordingly or contact support@optibus.com for assistance.",
       "info": "This preference is being phased out and has been replaced with {{replacingPref}}. It is no longer supported and may be removed from future versions.",
       "notSupported": "This preference has been replaced with \"{{replacingPref}}\" and is no longer usable. Delete this preference and begin using {{replacingPref}} instead.",
-      "travelWarning": "We have enhanced our duty travel capabilities. As part of this change, this preference is being replaced with {{replacingPref}}. Adjust preferences accordingly or contact support@optibus.com for assistance.",
-      "warning": "This preference is being phased out and has been replaced with {{replacingPref}}. It is no longer supported and may be removed from future versions. Adjust preferences accordingly or contact support."
+      "warning": "This preference is being phased out and has been replaced with {{replacingPref}}. It is no longer supported and may be removed from future versions. Adjust preferences accordingly or contact support.",
+      "travelWarning": "We have enhanced our duty travel capabilities. As part of this change, this preference is being replaced with {{replacingPref}}. Adjust preferences accordingly or contact support@optibus.com for assistance."
     },
     "discardDialog": {
       "message": "You have unsaved changes that will be lost if you close the preferences now.",
@@ -5162,8 +5170,6 @@ export default {
       "suffix": "copy"
     },
     "dutyTypes": {
-      "one": "Penalty for other: ",
-      "other": "Penalty for other: ",
       "add": "Add type",
       "allowPenalty": "Allowed",
       "customTimes": "Custom time definition",
@@ -5261,12 +5267,6 @@ export default {
         "nameExists": "Invalid roster group preference: unable to import group called \"{{name}}\" as it already exists"
       },
       "title": "Load Preferences"
-    },
-    "misc": {
-      "addStops": "Add stops",
-      "destination": "Destination",
-      "origin": "Origin",
-      "removeField": "Remove field"
     },
     "noPreferences": "No preferences to show",
     "onTime": {
@@ -5503,8 +5503,6 @@ export default {
       "title": "Save As Preferences"
     },
     "saveHint": "Set Preferences",
-    "selectCatalog": "Select a catalog",
-    "selectRoutes": "Select routes",
     "setPriority": "Drag and drop to set order of priority",
     "standbyTypes": {
       "add": "Add standby type",
@@ -5536,130 +5534,6 @@ export default {
       "lessThan": "Less than",
       "percentage": "Percentage"
     },
-    "travel": {
-      "other": "Other",
-      "addCriteria": "Add Criteria",
-      "allBreak": "All break types",
-      "breakTypes": "Break types",
-      "car": "Relief car",
-      "customExpression": "Custom expression",
-      "description": "Description",
-      "hints": {
-        "other_travel": {
-          "catalog": "Select a catalog",
-          "customExpression": "Customized criteria for this type of duty travel allowances. Supported input parameters are: {{supportedCustomInput}}",
-          "name": "This name will be used as the event type in the schedule",
-          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid this type of duty travel events as much as possible.",
-          "routes": "Select the routes for which this type of duty travel events are allowed",
-          "stops": "Select the stops for which this type of duty travel events are allowed",
-          "timesRange": "The times throughout the day at which this type of duty travel apply"
-        },
-        "public_transport": {
-          "catalog": "Select a public transportation catalog or the option to use the current schedule",
-          "customExpression": "Customized criteria for defining when public transportation can be used. Supported input parameters are: {{supportedCustomInput}}",
-          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid public transportation events as much as possible.",
-          "routes": "Select the routes for which public transportation is allowed",
-          "stops": "Select the stops for which public transportation is allowed",
-          "timesRange": "The times throughout the day at which public transportation applies"
-        },
-        "relief_car": {
-          "catalog": "Select a relief car catalog from existing catalogs",
-          "customExpression": "Customized criteria for relief car allowances. Supported input parameters are: {{supportedCustomInput}}",
-          "name": "This name will be used as a prefix for relief car IDs",
-          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid relief car events as much as possible.",
-          "routes": "Select the routes for which relief car events are allowed",
-          "stops": "Select the stops for which relief car events are allowed",
-          "timesRange": "The times throughout the day at which relief car events apply"
-        },
-        "walk": {
-          "catalog": "Select a walk catalog from existing catalogs",
-          "customExpression": "Customized criteria for walk allowances. Supported input parameters are: {{supportedCustomInput}}",
-          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid walk events as much as possible.",
-          "routes": "Select the routes for which walk events are allowed",
-          "stops": "Select the stops for which walk events are allowed",
-          "timesRange": "The times throughout the day at which walk events apply"
-        }
-      },
-      "otherAdder": "Duty travel type",
-      "publicTransport": {
-        "buffers": {
-          "addTimeRange": "Time range",
-          "defaultRow": "Default (All day)",
-          "maxWaitTime": "Maximum wait time",
-          "maxWaitTimeHint": "Define the maximum time a driver can wait to travel as a passenger using public transportation",
-          "minTimeAfter": "Minimum time after",
-          "minTimeAfterHint": "Define the minimum time a driver should wait after using public transportation and before starting the next duty piece",
-          "minTimeBefore": "Minimum time before",
-          "minTimeBeforeHint": "Define the minimum time a driver should wait to travel as a passenger using public transportation",
-          "title": "Buffer times"
-        },
-        "connections": {
-          "maxTransfersName": "Maximum transfers",
-          "maxTransfersNameHint": "Define the maximum number of transfers allowed between public transportation trips",
-          "noCombinationsAvailable": "No possible combinations are available. Define Walk or Other preference to use this option.",
-          "possibleCombinations": "Possible combinations",
-          "possibleCombinationsHint": "Select which travel types can be combined with public transportation",
-          "title": "Connections"
-        },
-        "externalCatalog": "External service (Coming soon)",
-        "instanceName": "Public Transportation",
-        "scheduleCatalog": {
-          "customExpressionHint": "Customized criteria for defining which trips drivers can use as passengers. The supported input parameter is an array of events representing the travel opportunity (for example: deadhead/trip/sequence of sub-trips)",
-          "deadheads": "Deadheads",
-          "emptyCatalogError": "Select a catalog or use the current schedule",
-          "invalidTimeplan": "The selected timeplan includes error violations",
-          "missingTimeplan": "The selected timeplan does not exist",
-          "pulls": "Pulls",
-          "serviceTrips": "Service Trips",
-          "tripRoutes": "Route trips",
-          "tripRoutesHint": "Select the routes whose trips can be used for public transportation",
-          "tripTypeMissing": "At least one trip type must be selected"
-        },
-        "useCurrentSchedule": "Use current schedule"
-      },
-      "publicTransportAdder": "Public Transportation",
-      "purpose": "Purpose",
-      "purposeTypes": {
-        "breaks": "Breaks",
-        "changeover": "Changeover",
-        "driver-base": "Driver base",
-        "split": "Split"
-      },
-      "reliefCar": {
-        "addUnattendedTime": "Add unattended time",
-        "drivenByRelievedDriver": "Specify if the relief car must be driven by a relieved driver instead of a designated driver",
-        "maxReliefCars": "Maximum relief cars",
-        "maxReliefCarsHint": "The maximum available relief cars",
-        "maxUnattendedTime": "Maximum unattended time",
-        "maxUnattendedTimeHint": "The maximum time a relief car can be left unattended at any relief points (outside the depot)",
-        "maxUnattendedTimePerStop": "Maximum unattended time per stop",
-        "maxUnattendedTimePerStopHint": "The maximum time a relief car can be left unattended at specific relief points (outside the depot)",
-        "preferenceLevel": "Round trip preference",
-        "preferenceLevelHint": "Specify the preference level for using round trips for relief cars. Select “Strongly preferred” to avoid deadheads as much as possible",
-        "preferred": "Preferred",
-        "reliefDriverHeader": "Driven by relieved driver",
-        "schedule": {
-          "dailyFixedCost": "Daily fixed cost",
-          "dailyFixedCostHint": "A fixed cost that is added to each relief car on a daily basis. It usually includes financing, insurance, and other fixed costs that are not related to the car mileage",
-          "distanceUnitCost": "Distance unit cost",
-          "distanceUnitCostHint": "Cost per {{unit}} for a relief car. This usually includes fuel and wear-and-tear costs",
-          "maxPassengers": "Maximum passengers",
-          "maxPassengersHint": "The maximum number of drivers that can travel as passengers in one relief car. This number includes the car’s driver",
-          "maxWaitTime": "Maximum wait time",
-          "maxWaitTimeHint": "The maximum time a driver can wait in order to be grouped with other drivers to travel as passengers in a relief car",
-          "pairGroupingStrategy": "Round trip grouping",
-          "pairGroupingStrategyHint": "Select “yes” to ensure round trips are operated by the same relief car",
-          "title": "Relief Car Schedule"
-        },
-        "selectUnattendedTime": "Select unattended time",
-        "stronglyPreferred": "Strongly preferred"
-      },
-      "routes": "Routes",
-      "selectCriteria": "Select Criteria",
-      "stops": "Stops",
-      "timesAllowed": "Time range",
-      "walk": "Walk"
-    },
     "type": "Type",
     "uncategorized": {
       "value": "Value"
@@ -5678,6 +5552,130 @@ export default {
       "min": "min",
       "perVehicle": "Per vehicle type:",
       "total": "Total for schedule"
+    },
+    "travel": {
+      "hints": {
+        "other_travel": {
+          "name": "This name will be used as the event type in the schedule",
+          "catalog": "Select a catalog",
+          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid this type of duty travel events as much as possible.",
+          "routes": "Select the routes for which this type of duty travel events are allowed",
+          "timesRange": "The times throughout the day at which this type of duty travel apply",
+          "stops": "Select the stops for which this type of duty travel events are allowed",
+          "customExpression": "Customized criteria for this type of duty travel allowances. Supported input parameters are: {{supportedCustomInput}}"
+        },
+        "relief_car": {
+          "name": "This name will be used as a prefix for relief car IDs",
+          "catalog": "Select a relief car catalog from existing catalogs",
+          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid relief car events as much as possible.",
+          "routes": "Select the routes for which relief car events are allowed",
+          "timesRange": "The times throughout the day at which relief car events apply",
+          "stops": "Select the stops for which relief car events are allowed",
+          "customExpression": "Customized criteria for relief car allowances. Supported input parameters are: {{supportedCustomInput}}"
+        },
+        "walk": {
+          "catalog": "Select a walk catalog from existing catalogs",
+          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid walk events as much as possible.",
+          "routes": "Select the routes for which walk events are allowed",
+          "timesRange": "The times throughout the day at which walk events apply",
+          "stops": "Select the stops for which walk events are allowed",
+          "customExpression": "Customized criteria for walk allowances. Supported input parameters are: {{supportedCustomInput}}"
+        },
+        "public_transport": {
+          "catalog": "Select a public transportation catalog or the option to use the current schedule",
+          "penalty": "Assign a penalty to apply to set conditions. Select a higher penalty to avoid public transportation events as much as possible.",
+          "routes": "Select the routes for which public transportation is allowed",
+          "timesRange": "The times throughout the day at which public transportation applies",
+          "stops": "Select the stops for which public transportation is allowed",
+          "customExpression": "Customized criteria for defining when public transportation can be used. Supported input parameters are: {{supportedCustomInput}}"
+        }
+      },
+      "publicTransportAdder": "Public Transportation",
+      "otherTravel": "Other",
+      "otherAdder": "Duty travel type",
+      "addCriteria": "Add Criteria",
+      "selectCriteria": "Select Criteria",
+      "purpose": "Purpose",
+      "breakTypes": "Break types",
+      "allBreak": "All break types",
+      "purposeTypes" : {
+        "changeover": "Changeover",
+        "driver-base": "Driver base",
+        "split": "Split",
+        "breaks": "Breaks"
+      },
+      "routes": "Routes",
+      "stops": "Stops",
+      "timesAllowed": "Time range",
+      "customExpression": "Custom expression",
+      "walk": "Walk",
+      "car": "Relief car",
+      "description": "Description",
+      "publicTransport": {
+        "instanceName": "Public Transportation",
+        "externalCatalog": "External service (Coming soon)",
+        "useCurrentSchedule": "Use current schedule",
+        "scheduleCatalog": {
+          "serviceTrips": "Service Trips",
+          "deadheads": "Deadheads",
+          "pulls": "Pulls",
+          "tripRoutes": "Route trips",
+          "tripRoutesHint": "Select the routes whose trips can be used for public transportation",
+          "customExpressionHint": "Customized criteria for defining which trips drivers can use as passengers. The supported input parameter is an array of events representing the travel opportunity (for example: deadhead/trip/sequence of sub-trips)",
+          "emptyCatalogError": "Select a catalog or use the current schedule",
+          "tripTypeMissing": "At least one trip type must be selected",
+          "missingTimeplan": "The selected timeplan does not exist",
+          "invalidTimeplan": "The selected timeplan includes error violations"
+        },
+        "connections": {
+          "title": "Connections",
+          "maxTransfersName": "Maximum transfers",
+          "possibleCombinations": "Possible combinations",
+          "maxTransfersNameHint": "Define the maximum number of transfers allowed between public transportation trips",
+          "possibleCombinationsHint": "Select which travel types can be combined with public transportation",
+          "noCombinationsAvailable": "No possible combinations are available. Define Walk or Other preference to use this option."
+        },
+        "buffers": {
+          "title": "Buffer times",
+          "minTimeBefore": "Minimum time before",
+          "minTimeBeforeHint": "Define the minimum time a driver should wait to travel as a passenger using public transportation",
+          "minTimeAfter": "Minimum time after",
+          "minTimeAfterHint": "Define the minimum time a driver should wait after using public transportation and before starting the next duty piece",
+          "maxWaitTime": "Maximum wait time",
+          "maxWaitTimeHint": "Define the maximum time a driver can wait to travel as a passenger using public transportation",
+          "defaultRow": "Default (All day)",
+          "addTimeRange": "Time range"
+        }
+      },
+      "reliefCar": {
+        "reliefDriverHeader": "Driven by relieved driver",
+        "preferenceLevel": "Round trip preference",
+        "preferenceLevelHint": "Specify the preference level for using round trips for relief cars. Select “Strongly preferred” to avoid deadheads as much as possible",
+        "stronglyPreferred": "Strongly preferred",
+        "preferred": "Preferred",
+        "maxReliefCars": "Maximum relief cars",
+        "maxReliefCarsHint": "The maximum available relief cars",
+        "addUnattendedTime": "Add unattended time",
+        "selectUnattendedTime": "Select unattended time",
+        "maxUnattendedTime": "Maximum unattended time",
+        "maxUnattendedTimeHint": "The maximum time a relief car can be left unattended at any relief points (outside the depot)",
+        "maxUnattendedTimePerStop": "Maximum unattended time per stop",
+        "maxUnattendedTimePerStopHint": "The maximum time a relief car can be left unattended at specific relief points (outside the depot)",
+        "drivenByRelievedDriver": "Specify if the relief car must be driven by a relieved driver instead of a designated driver",
+        "schedule": {
+          "title": "Relief Car Schedule",
+          "dailyFixedCost": "Daily fixed cost",
+          "dailyFixedCostHint": "A fixed cost that is added to each relief car on a daily basis. It usually includes financing, insurance, and other fixed costs that are not related to the car mileage",
+          "distanceUnitCost": "Distance unit cost",
+          "distanceUnitCostHint": "Cost per {{unit}} for a relief car. This usually includes fuel and wear-and-tear costs",
+          "maxPassengers": "Maximum passengers",
+          "maxPassengersHint": "The maximum number of drivers that can travel as passengers in one relief car. This number includes the car’s driver",
+          "maxWaitTime": "Maximum wait time",
+          "maxWaitTimeHint": "The maximum time a driver can wait in order to be grouped with other drivers to travel as passengers in a relief car",
+          "pairGroupingStrategy": "Round trip grouping",
+          "pairGroupingStrategyHint": "Select “yes” to ensure round trips are operated by the same relief car"
+        }
+      }
     }
   },
   "prefMeta": {
@@ -5694,13 +5692,13 @@ export default {
     "create_trip_hooks": "Evaluating trips hooks",
     "creating_duties": "Creating duties",
     "creating_duty_combinations": "Creating duties (pieces: {{completed_pieces}}/{{piece_count}})",
-    "creating_extended_multi_piece_duty_combinations": "Creating duties (extended multi pieces: {{completed_pieces}}/{{piece_count}})",
-    "creating_extended_multi_piece_pbs_vehicle_combinations": "Creating vehicles (extended pieces: {{completed_pieces}}/{{piece_count}})",
     "creating_multi_piece_duty_combinations": "Creating duties (multi pieces: {{completed_pieces}}/{{piece_count}})",
-    "creating_multi_piece_pbs_vehicle_combinations": "Creating vehicles (multi pieces: {{completed_pieces}}/{{piece_count}})",
+    "creating_extended_multi_piece_duty_combinations": "Creating duties (extended multi pieces: {{completed_pieces}}/{{piece_count}})",
     "creating_pbs_duties": "Creating vehicles",
     "creating_pbs_pieces": "Creating vehicle pieces",
     "creating_pbs_vehicle_combinations": "Creating vehicles (pieces: {{completed_pieces}}/{{piece_count}})",
+    "creating_multi_piece_pbs_vehicle_combinations": "Creating vehicles (multi pieces: {{completed_pieces}}/{{piece_count}})",
+    "creating_extended_multi_piece_pbs_vehicle_combinations": "Creating vehicles (extended pieces: {{completed_pieces}}/{{piece_count}})",
     "creating_pieces": "Creating pieces",
     "creating_vehicles": "Creating vehicles",
     "depots": {
@@ -6407,22 +6405,22 @@ export default {
     "idle": "Deadhead",
     "layover": "Layover",
     "new": "New",
-    "other_travel": "Other Travel",
     "post_trip": "Post-trip",
     "pre_trip": "Pre-trip",
-    "public_travel": "Public Transportation",
     "recharge": "Recharge",
     "refuel": "Refuel",
     "relief": "Relief vehicle",
-    "relief_car": "Relief Car",
     "service": "Service",
     "sign_off": "Sign off",
     "sign_on": "Sign on",
     "split": "Split",
-    "tapt": "Public transportation",
     "taxi": "Taxi",
-    "vehicle_preparation": "Vehicle preparation",
-    "walk": "Walk"
+    "other_travel": "Other Travel",
+    "public_travel": "Public Transportation",
+    "relief_car": "Relief Car",
+    "walk": "Walk",
+    "tapt": "Public transportation",
+    "vehicle_preparation": "Vehicle preparation"
   },
   "temporaryWarningWhenNoVIP": "This preference requires advanced vehicle optimization. Contact support to enable it.",
   "term": {
@@ -7050,6 +7048,23 @@ export default {
         "header": "Relief Timing preference - unattended vehicle"
       }
     },
+    "travel": {
+      "not_in_catalog": {
+        "details": "The {{travel_type}} trip starting at {{start_time}} is not in the catalog.",
+        "header": "{{travel_type}} trip missing in catalog",
+        "partial": "{{travel_type}} trip missing in catalog"
+      },
+      "not_by_preferences": {
+        "details": "The {{travel_type}} trip starting at {{start_time}} is not permitted by the defined {{preference_name}} preference.",
+        "header": "{{travel_type}} trip is not permitted",
+        "partial": "{{travel_type}} trip is not permitted"
+      },
+      "doesnt_match_catalog": {
+        "details": "The travel time or distance of the {{travel_type}} trip starting at {{start_time}} does not match the value in the catalog.",
+        "header": "{{travel_type}} does not match catalog",
+        "partial": "{{travel_type}} does not match catalog"
+      }
+    },
     "average_global_constraint": {
       "equal": {
         "details": "The average value of global constraint {{name}} ({{actual}}) is not equal to {{expected}}, (duty count is {{duty_count}})",
@@ -7096,6 +7111,11 @@ export default {
       "details": "The \"{{source_stop}}\" stop is too far from the \"{{target_stop}}\" stop.",
       "header": "Stops are too far",
       "partial": "Stops are too far"
+    },
+    "taxi_with_travel_preferences": {
+      "details": "The {{travel_type}} trip starting at {{start_time}} needs to be updated. Deleting the trip will auto-update it.",
+      "header": "{{travel_type}} trip needs to be updated",
+      "partial": "{{travel_type}} trip needs to be updated"
     },
     "currErrors": "Route {{route}}",
     "currErrorsDismissed": "Dismissed Issues of {{route}}",
@@ -7522,11 +7542,6 @@ export default {
         "header": "Assigned standby types are not defined in the preferences."
       }
     },
-    "taxi_with_travel_preferences": {
-      "details": "The {{travel_type}} trip starting at {{start_time}} needs to be updated. Deleting the trip will auto-update it.",
-      "header": "{{travel_type}} trip needs to be updated",
-      "partial": "{{travel_type}} trip needs to be updated"
-    },
     "timeplans": {
       "broken_data": {
         "broken_shape": {
@@ -7722,23 +7737,6 @@ export default {
       "less": {
         "details": "Timing constraint {{name}} at {{time_range}} ({{actual}}) is more than {{expected}}",
         "header": "Timing constraint unsatisfied"
-      }
-    },
-    "travel": {
-      "doesnt_match_catalog": {
-        "details": "The travel time or distance of the {{travel_type}} trip starting at {{start_time}} does not match the value in the catalog.",
-        "header": "{{travel_type}} does not match catalog",
-        "partial": "{{travel_type}} does not match catalog"
-      },
-      "not_by_preferences": {
-        "details": "The {{travel_type}} trip starting at {{start_time}} is not permitted by the defined {{preference_name}} preference.",
-        "header": "{{travel_type}} trip is not permitted",
-        "partial": "{{travel_type}} trip is not permitted"
-      },
-      "not_in_catalog": {
-        "details": "The {{travel_type}} trip starting at {{start_time}} is not in the catalog.",
-        "header": "{{travel_type}} trip missing in catalog",
-        "partial": "{{travel_type}} trip missing in catalog"
       }
     },
     "undismissIssuesButton": "Reactivate issues",
