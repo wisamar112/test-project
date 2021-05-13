@@ -1,5 +1,21 @@
-{
-  "second_key": "This is a real change!",
-  "third_key": "Not a real change",
-  "first_key": "this is a test",
+export default {
+  "actions": {
+    "goToRow": "Go to row ID",
+    "refresh": {
+      "hint": "Refresh the browser",
+      "text": "Refresh"
+    },
+    "revive": {
+      "hint": "Revive",
+      "text": "Revive"
+    }
+  },
+  "alerts": {
+    "alert": "alert",
+    "count": {
+      "critical": "{{count}} critical",
+      "minor": "{{count}} minor"
+    },
+  },
+  "eta": "({{delay}}min delay)",
 }
