@@ -1,4 +1,11 @@
 export default {
+  "alerts": {
+    "alert": "alert",
+    "count": {
+      "critical": "{{count}} real change",
+      "minor": "{{count}} minor"
+    },
+  },
   "actions": {
     "goToRow": "Go to row ID",
     "refresh": {
@@ -10,12 +17,5 @@ export default {
       "text": "Revive"
     }
   },
-  "alerts": {
-    "alert": "alert",
-    "count": {
-      "critical": "{{count}} critical",
-      "minor": "{{count}} minor"
-    },
-  },
-  "eta": "({{delay}}min delay)",
+  "eta": "({{delay}}min delay)"
 }
